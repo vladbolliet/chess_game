@@ -1,0 +1,11 @@
+#ifndef UI_H
+#define UI_H
+
+#include <stdio.h>
+#include "player.h"
+#include "constants.h"
+
+void welcome_message(player player1, player player2);
+void ui(player player1, player player2, char board[BOARD_SIZE][BOARD_SIZE]);
+
+#endif
