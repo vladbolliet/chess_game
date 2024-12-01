@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "constants.h": "c",
-        "functions.h": "c"
+        "functions.h": "c",
+        "player.h": "c"
     }
 }

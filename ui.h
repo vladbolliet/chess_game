@@ -7,5 +7,6 @@
 
 void welcome_message(player player1, player player2);
 void ui(player player1, player player2, char board[BOARD_SIZE][BOARD_SIZE]);
+void print_board(char board[BOARD_SIZE][BOARD_SIZE]);
 
 #endif

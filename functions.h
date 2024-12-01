@@ -5,6 +5,7 @@
 #include "constants.h"
 
 void random_choose_sides(struct player *player1, struct player *player2);
-void board_init(char board[BOARD_SIZE][BOARD_SIZE]);
+void move_piece(char (*board)[BOARD_SIZE], char start_pos[2], char end_pos[2]);
+int check_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char end_pos[2]);
 
 #endif
