@@ -4,4 +4,5 @@ Author: Vlad Bolliet
 
 ## Description
 
-This is a simple chess game made in C.
+This is a simple chess game made in C
+ORIGINAL branch.
