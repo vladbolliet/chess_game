@@ -3,19 +3,23 @@
 #include "player.h"
 #include "constants.h"
 #include "functions.h"
+#include "piece_identifier.h"
 
 
 void ui(player player1, player player2, char board[BOARD_SIZE][BOARD_SIZE]){
-       welcome_message(player1, player2);
-       printf("\n");
-       print_board(board);
-       if(check_move(board, "a1", "g3") == TRUE){
-        printf("Valid move\n");
-       }
-       else{
-        printf("Invalid move\n");
-       }
-       print_board(board);
+    char start_pos[2], end_pos[2];
+    welcome_message(player1, player2);
+    printf("\n");
+    print_board(board);
+    while(1){
+        get_move(start_pos, end_pos);
+        if(check_move(board, start_pos, end_pos)){
+            move_piece(board, start_pos, end_pos);
+        } else {
+            printf("Invalid move\n");
+        }
+        print_board(board);
+    }
 }
 
 void welcome_message(player player1, player player2){
@@ -33,15 +37,33 @@ void welcome_message(player player1, player player2){
 
 void print_board(char board[BOARD_SIZE][BOARD_SIZE]){
     for(int i = 0; i < BOARD_SIZE; i++){
-        printf("\033[38;5;88m%d\033[0m ", 8 - i);
+        // Print row numbers with reset color
+        printf("\033[0m\033[38;5;88m%d\033[0m ", 8 - i);
         for(int j = 0; j < BOARD_SIZE; j++){
-            printf("%c ", board[i][j]);
+            if((i + j) % 2 == 0){ //setup board square color which next character will print along with
+                printf("\033[48;5;94m");
+            } else {
+                printf("\033[48;5;208m");
+            }
+            // Print uppercase letters in black
+            if(board[i][j] >= 'A' && board[i][j] <= 'Z'){
+                printf("\033[30m%c \033[0m", board[i][j]);
+            } else {
+                printf("%c ", board[i][j]);
+            }
         }
-        printf("\n");
+        // Reset color after each row
+        printf("\033[0m\n");
     }
-    printf("  ");
+    // Print column letters with reset color
+    printf("\033[0m  ");
     for(int i = 0; i < BOARD_SIZE; i++){
         printf("\033[38;5;88m%c\033[0m ", i + 'A');
     }
-    printf("\n");
+    printf("\033[0m\n");
+}
+
+void get_move(char start_pos[2], char end_pos[2]){
+    printf("Enter your move: ");
+    scanf("%s %s", start_pos, end_pos);
 }

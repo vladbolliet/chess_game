@@ -15,4 +15,12 @@ int starting_position_is_empty(char board[BOARD_SIZE][BOARD_SIZE], char start_po
 //ending position is occupied by a piece from the same side
 int ending_position_is_occupied_by_same_side_piece(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char end_pos[2]);
 
+//valid moves for each piece
+int valid_knight_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char end_pos[2]);
+int valid_pawn_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char end_pos[2]);
+int valid_rook_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char end_pos[2]);
+int valid_bishop_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char end_pos[2]);
+int valid_queen_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char end_pos[2]);
+int valid_king_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char end_pos[2]);
+
 #endif
