@@ -126,8 +126,14 @@ int valid_king_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char 
         return FALSE;
     }
 
+    //castling
+
+    
+    
     return TRUE;
 }
+
+
 
 //also make sure to include if the piece that you want to move is pinned
 //also make sure to include if the king is in check
