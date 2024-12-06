@@ -11,4 +11,5 @@ int everything_in_between_vertically_and_horizontally_is_empty(char board[BOARD_
 int everything_in_between_diagonally_is_empty(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char end_pos[2]);
 void initialize_players(player *player1, player *player2);
 
+
 #endif

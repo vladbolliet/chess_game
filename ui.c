@@ -17,13 +17,19 @@ void ui(player *player1, player *player2, char board[BOARD_SIZE][BOARD_SIZE]){
         player1 = player2;
         player2 = aux;
     }
+    int start_row, start_column;
     while(1){
         //white player turn
         while(1){
             print_board(board);
             printf("UI : %s (white) turn\n", player1->name);
             get_move(start_pos, end_pos);
-            if(check_move(board, start_pos, end_pos, player1, player2)){
+            start_row = BOARD_SIZE - (start_pos[1] - '0');
+            start_column = start_pos[0] - 'a';
+            if(board[start_row][start_column] >= 'A' && board[start_row][start_column] <= 'Z'){ //if the piece is not white
+                printf("Invalid move, can't move other side piece\n");
+            }
+            else if(check_move(board, start_pos, end_pos, player1, player2)){
                 move_piece(board, start_pos, end_pos, player1);
                 break;
             } else {
@@ -36,7 +42,12 @@ void ui(player *player1, player *player2, char board[BOARD_SIZE][BOARD_SIZE]){
             print_board(board);
             printf("UI : %s (black) turn\n", player2->name);
             get_move(start_pos, end_pos);
-            if(check_move(board, start_pos, end_pos, player2, player1)){
+            start_row = BOARD_SIZE - (start_pos[1] - '0');
+            start_column = start_pos[0] - 'a';
+            if(board[start_row][start_column] >= 'a' && board[start_row][start_column] <= 'z'){ //if the piece is not black
+                printf("Invalid move, can't move other side piece\n");
+            }
+            else if(check_move(board, start_pos, end_pos, player2, player1)){
                 move_piece(board, start_pos, end_pos, player2);
                 break;
             } else {

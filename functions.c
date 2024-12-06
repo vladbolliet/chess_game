@@ -6,6 +6,7 @@
 #include "functions.h"
 #include "valid_moves.h"
 #include "piece_identifier.h"
+#include "check.h"
 
 void random_choose_sides(player *player1, player *player2) { //randomly choose the side of each player
     srand(time(NULL));
@@ -76,12 +77,7 @@ int check_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char end_p
     int end_row = BOARD_SIZE - (end_pos[1] - '0');
     int start_column = start_pos[0] - 'a';
     int end_column = end_pos[0] - 'a';
-    // Check if the piece is the same color as the player
-    /*if((current_player->side == WHITE && board[start_row][start_column] >= 'A' && board[start_row][start_column] <= 'Z')
-    || (current_player->side == BLACK && board[start_row][start_column] >= 'a' && board[start_row][start_column] <= 'z')){
-        printf("DEBUG: Piece is not the same color as the player\n");
-        return FALSE;
-    }*/ //doesn't work because when we check other_side_piece_moves, the color of the piece we're testing is opposite
+    
     if (starting_position_same_as_ending_position(start_pos, end_pos)){
         return FALSE;
     }
@@ -113,6 +109,11 @@ int check_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char end_p
         return FALSE;
     }
     if(piece_is_king(board, start_pos) && !valid_king_move(board, start_pos, end_pos, current_player, opponent_player)){
+        return FALSE;
+    }
+
+    //check if piece is pinned
+    if(piece_is_pinned(board, start_pos, current_player, opponent_player)){
         return FALSE;
     }
 
