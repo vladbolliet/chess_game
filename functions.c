@@ -116,10 +116,15 @@ int check_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char end_p
         return FALSE;
     }
 
+    // update last player's move
     current_player->last_move_start_row = start_row;
     current_player->last_move_end_row = end_row;
     current_player->last_piece_moved = board[start_row][start_column];
-
+    // check if the king or rooks moved (for castling)
+    if(board[start_row][start_column] == 'K' || board[start_row][start_column] == 'k'){current_player->king_moved = TRUE;}
+    if(board[start_row][start_column] == 'R' && start_column == 0){current_player->rook_a_moved = TRUE;}
+    if(board[start_row][start_column] == 'R' && start_column == 7){current_player->rook_h_moved = TRUE;}
+    
     return TRUE;
 }
 

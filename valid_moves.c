@@ -151,7 +151,7 @@ int valid_king_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char 
     printf("DEBUG: start_row=%d, start_column=%d, end_row=%d, end_column=%d\n", start_row, start_column, end_row, end_column);
 
     // If opposing piece is attacking square where king wants to move
-    if (other_side_piece_can_move_to_square(board, start_pos, end_pos, current_player, NULL)) {
+    if (other_side_piece_can_move_to_square(board, start_pos, end_pos, current_player, opponent_player)) {
         printf("DEBUG: Invalid king move - square under attack\n");
         return FALSE;
     }
@@ -244,9 +244,6 @@ int valid_king_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char 
             }
         }
         printf("DEBUG: went past all castling ifs\n");
-    }
-    else {
-        return FALSE;
     }
 
     // King moves 1 square at a time

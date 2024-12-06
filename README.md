@@ -88,5 +88,4 @@ gcc -o chess [chess.c](http://_vscodecontentref_/2) [functions.c](http://_vscode
 //also make sure to include if the king is in checkmate
 //also make sure to include if the king is in stalemate
 
-//also make sure to include if the pawn can be en passant
 //player shouldn't be able to move piece from the other side
