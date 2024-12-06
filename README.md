@@ -81,3 +81,12 @@ Contains functions to validate moves:
 ```sh
 gcc -o chess [chess.c](http://_vscodecontentref_/2) [functions.c](http://_vscodecontentref_/3) [piece_identifier.c](http://_vscodecontentref_/4) [ui.c](http://_vscodecontentref_/5) [valid_moves.c](http://_vscodecontentref_/6)
 ./chess
+
+
+//also make sure to include if the piece that you want to move is pinned
+//also make sure to include if the king is in check
+//also make sure to include if the king is in checkmate
+//also make sure to include if the king is in stalemate
+
+//also make sure to include if the pawn can be en passant
+//player shouldn't be able to move piece from the other side
