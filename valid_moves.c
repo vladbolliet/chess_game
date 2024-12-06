@@ -59,7 +59,7 @@ int valid_pawn_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char 
 
     printf("DEBUG: Pawn move from %c%c to %c%c\n", start_pos[0], start_pos[1], end_pos[0], end_pos[1]);
     printf("DEBUG: start_row=%d, start_column=%d, end_row=%d, end_column=%d\n", start_row, start_column, end_row, end_column);
-
+    
     // Forward pawn move
     if (start_column == end_column) {
         // Pawn moves 2 squares
@@ -85,27 +85,35 @@ int valid_pawn_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char 
     //en passant
 
     //white pawn en passant
-
-    /*if(start_row == 3 && end_row == 2 && abs(start_column - end_column) == 1 && opponent_player.last_move_start_row == 1 && opponent_player.last_move_end_row == 3){
-        if(board[3][end_column] == 'P'){
+    printf("DEBUG: inside valid_pawn_move ; DEBUG: last pieces moved by oppoennt: %c %d %d\n", opponent_player->last_piece_moved, opponent_player->last_move_start_row, opponent_player->last_move_end_row);
+    if(start_row == 3 && end_row == 2 && abs(start_column - end_column) == 1 && 
+       opponent_player->last_move_start_row == 1 && opponent_player->last_move_end_row == 3 &&
+       opponent_player->last_piece_moved == 'P' && board[3][end_column] == 'P'){
             printf("DEBUG: Valid white pawn en passant\n");
             board[3][end_column] = EMPTY;
             return TRUE;
-        }
-        //doesn't check if last move is a pawn move
-    }*/
-
+    }
+    //black pawn en passant
+    if(start_row == 4 && end_row == 5 && abs(start_column - end_column) == 1 && 
+       opponent_player->last_move_start_row == 6 && opponent_player->last_move_end_row == 4 &&
+       opponent_player->last_piece_moved == 'p' && board[4][end_column] == 'p'){
+            printf("DEBUG: Valid black pawn en passant\n");
+            board[4][end_column] = EMPTY;
+            return TRUE;
+       }
+    
     // Diagonal pawn move
-    if (start_row - end_row == 1 && abs(start_column - end_column) == 1) { // White pawn capturing
+    if (start_row - end_row == 1 && abs(start_column - end_column) == 1 && board[end_row][end_column]>='A' &&
+        board[end_row][end_column]<='Z') { // White pawn capturing
         printf("DEBUG: Valid white pawn capture\n");
         return TRUE;
     }
-    if (start_row - end_row == -1 && abs(start_column - end_column) == 1) { // Black pawn capturing
+    if (start_row - end_row == -1 && abs(start_column - end_column) == 1 && board[end_row][end_column]>='a' &&
+        board[end_row][end_column]<='z') { // Black pawn capturing
         printf("DEBUG: Valid black pawn capture\n");
         return TRUE;
     }
     
-
     printf("DEBUG: Invalid pawn move\n");
     return FALSE;
 }

@@ -118,6 +118,7 @@ int check_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char end_p
 
     current_player->last_move_start_row = start_row;
     current_player->last_move_end_row = end_row;
+    current_player->last_piece_moved = board[start_row][start_column];
 
     return TRUE;
 }

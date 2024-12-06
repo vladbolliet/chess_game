@@ -30,7 +30,7 @@ void ui(player *player1, player *player2, char board[BOARD_SIZE][BOARD_SIZE]){
                 printf("Invalid move, try again\n");
             }
         }
-
+        printf("DEBUG: last pieces moved by oppoennt: %c %d %d\n", player2->last_piece_moved, player2->last_move_start_row, player2->last_move_end_row);
         //black player turn
         while(1){
             print_board(board);
@@ -43,6 +43,7 @@ void ui(player *player1, player *player2, char board[BOARD_SIZE][BOARD_SIZE]){
                 printf("Invalid move, try again\n");
             }
         }
+        printf("DEBUG: last pieces moved by oppoennt: %c %d %d\n", player1->last_piece_moved, player1->last_move_start_row, player1->last_move_end_row);
     }
 }
 

@@ -10,6 +10,7 @@ typedef struct player{
     int rook_h_moved;
     int last_move_start_row;
     int last_move_end_row;
+    char last_piece_moved;
 } player;
 
 #endif
