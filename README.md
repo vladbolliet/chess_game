@@ -83,7 +83,8 @@ gcc -o chess [chess.c](http://_vscodecontentref_/2) [functions.c](http://_vscode
 ./chess
 
 
-//also make sure to include if the piece that you want to move is pinned
-//also make sure to include if the king is in check
 //also make sure to include if the king is in checkmate
 //also make sure to include if the king is in stalemate
+
+//to fix the pawn attacking square where king wants to go, i need to simulate the actual king move and 
+only then see if pawn can take king, since pawns can't move diagonally when the square is empty

@@ -4,7 +4,8 @@
 #include "constants.h"
 #include "functions.h"
 #include "piece_identifier.h"
-
+#include "check.h"
+#include "valid_moves.h"
 
 void ui(player *player1, player *player2, char board[BOARD_SIZE][BOARD_SIZE]){
     char start_pos[3], end_pos[3];
@@ -29,7 +30,22 @@ void ui(player *player1, player *player2, char board[BOARD_SIZE][BOARD_SIZE]){
             if(board[start_row][start_column] >= 'A' && board[start_row][start_column] <= 'Z'){ //if the piece is not white
                 printf("Invalid move, can't move other side piece\n");
             }
-            else if(check_move(board, start_pos, end_pos, player1, player2)){
+            else if(ending_position_is_occupied_by_same_side_piece(board, start_pos, end_pos)){
+                printf("Invalid move, can't move to same side piece\n");
+            }
+            /*else if(king_is_in_check(board, player1, player2)){
+                char temp_board[BOARD_SIZE][BOARD_SIZE];
+                for(int i = 0; i < BOARD_SIZE; i++){
+                    for(int j = 0; j < BOARD_SIZE; j++){
+                        temp_board[i][j] = board[i][j];
+                    }
+                }
+                move_piece(temp_board, start_pos, end_pos, player1);
+                if(king_is_in_check(temp_board, player1, player2)){
+                    printf("Invalid move, king is in check\n");
+                }
+            }*/ //the pinned piece function might be enough
+            else if(check_move(board, start_pos, end_pos, player1, player2, 1)){
                 move_piece(board, start_pos, end_pos, player1);
                 break;
             } else {
@@ -47,7 +63,19 @@ void ui(player *player1, player *player2, char board[BOARD_SIZE][BOARD_SIZE]){
             if(board[start_row][start_column] >= 'a' && board[start_row][start_column] <= 'z'){ //if the piece is not black
                 printf("Invalid move, can't move other side piece\n");
             }
-            else if(check_move(board, start_pos, end_pos, player2, player1)){
+            /*else if(king_is_in_check(board, player2, player1)){
+                char temp_board[BOARD_SIZE][BOARD_SIZE];
+                for(int i = 0; i < BOARD_SIZE; i++){
+                    for(int j = 0; j < BOARD_SIZE; j++){
+                        temp_board[i][j] = board[i][j];
+                    }
+                }
+                move_piece(temp_board, start_pos, end_pos, player2);
+                if(king_is_in_check(temp_board, player2, player1)){
+                    printf("Invalid move, king is in check\n");
+                }
+            }*/
+            else if(check_move(board, start_pos, end_pos, player2, player1, 1)){
                 move_piece(board, start_pos, end_pos, player2);
                 break;
             } else {
@@ -56,6 +84,7 @@ void ui(player *player1, player *player2, char board[BOARD_SIZE][BOARD_SIZE]){
         }
         printf("DEBUG: last pieces moved by oppoennt: %c %d %d\n", player1->last_piece_moved, player1->last_move_start_row, player1->last_move_end_row);
     }
+    printf("Game over\n");
 }
 
 void welcome_message(player *player1, player *player2){

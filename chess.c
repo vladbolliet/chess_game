@@ -9,9 +9,9 @@ int main() {
     {   {'R', EMPTY, EMPTY, EMPTY, 'K', EMPTY, EMPTY, 'R'},
         {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
         {EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY},
-        {EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY},
-        {EMPTY, EMPTY, EMPTY, 'B', EMPTY, EMPTY, EMPTY, EMPTY},
-        {EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY},
+        {EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, 'N', EMPTY},
+        {EMPTY, 'k', EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY},
+        {EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, 'P', EMPTY, EMPTY},
         {'p', 'p', 'p', 'p', 'p', EMPTY, 'p', 'p'},
         {'r', EMPTY, EMPTY, EMPTY, 'k', EMPTY, EMPTY, 'r'}
     };

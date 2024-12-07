@@ -60,6 +60,18 @@ int valid_pawn_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char 
     printf("DEBUG: Pawn move from %c%c to %c%c\n", start_pos[0], start_pos[1], end_pos[0], end_pos[1]);
     printf("DEBUG: start_row=%d, start_column=%d, end_row=%d, end_column=%d\n", start_row, start_column, end_row, end_column);
     
+    // Diagonal pawn move
+    if (start_row - end_row == 1 && abs(start_column - end_column) == 1 && board[end_row][end_column]>='A' &&
+        board[end_row][end_column]<='Z') { // White pawn capturing
+        printf("DEBUG: Valid white pawn capture\n");
+        return 3;
+    }
+    if (start_row - end_row == -1 && abs(start_column - end_column) == 1 && board[end_row][end_column]>='a' &&
+        board[end_row][end_column]<='z') { // Black pawn capturing
+        printf("DEBUG: Valid black pawn capture\n");
+        return 3;
+    }
+
     // Forward pawn move
     if (start_column == end_column) {
         // Pawn moves 2 squares
@@ -102,17 +114,7 @@ int valid_pawn_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char 
             return TRUE;
        }
     
-    // Diagonal pawn move
-    if (start_row - end_row == 1 && abs(start_column - end_column) == 1 && board[end_row][end_column]>='A' &&
-        board[end_row][end_column]<='Z') { // White pawn capturing
-        printf("DEBUG: Valid white pawn capture\n");
-        return TRUE;
-    }
-    if (start_row - end_row == -1 && abs(start_column - end_column) == 1 && board[end_row][end_column]>='a' &&
-        board[end_row][end_column]<='z') { // Black pawn capturing
-        printf("DEBUG: Valid black pawn capture\n");
-        return TRUE;
-    }
+    
     
     printf("DEBUG: Invalid pawn move\n");
     return FALSE;
@@ -126,9 +128,12 @@ int valid_rook_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char 
 }
 
 int valid_bishop_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char end_pos[2]){
+    printf("DEBUG: Checking bishop move from %c%c to %c%c\n", start_pos[0], start_pos[1], end_pos[0], end_pos[1]);
     if(abs(start_pos[0] - end_pos[0]) == abs(start_pos[1] - end_pos[1]) && everything_in_between_diagonally_is_empty(board, start_pos, end_pos)){
+        printf("DEBUG: Valid bishop move\n");
         return TRUE;
     }
+    printf("DEBUG: Invalid bishop move\n");
     return FALSE;
 }
 

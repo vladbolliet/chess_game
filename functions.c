@@ -71,26 +71,27 @@ void move_piece(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char end_
     }
 }
 
-int check_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char end_pos[2], player *current_player, player *opponent_player) {
+int check_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char end_pos[2], player *current_player, player *opponent_player, int pinned_flag) {
     //basic cases
     int start_row = BOARD_SIZE - (start_pos[1] - '0');
     int end_row = BOARD_SIZE - (end_pos[1] - '0');
     int start_column = start_pos[0] - 'a';
     int end_column = end_pos[0] - 'a';
-    
+    printf("1\n");
     if (starting_position_same_as_ending_position(start_pos, end_pos)){
         return FALSE;
     }
+    printf("2\n");
     if(starting_or_ending_position_out_of_bounds(start_pos, end_pos)){
+        printf("Invalid move, out of bounds\n");
         return FALSE;
     }
+    printf("3\n");
     if(starting_position_is_empty(board, start_pos)){
         return FALSE;
     }
-    if(ending_position_is_occupied_by_same_side_piece(board, start_pos, end_pos)){
-        return FALSE;
-    }
-    
+    printf("4\n");
+        
 
     //piece specific cases
     if(piece_is_knight(board, start_pos) && !valid_knight_move(board, start_pos, end_pos)){
@@ -112,19 +113,24 @@ int check_move(char board[BOARD_SIZE][BOARD_SIZE], char start_pos[2], char end_p
         return FALSE;
     }
 
+    printf("5\n");
+
     //check if piece is pinned
-    if(piece_is_pinned(board, start_pos, current_player, opponent_player)){
+    if(pinned_flag && piece_is_pinned(board, start_pos, current_player, opponent_player)){
         return FALSE;
     }
+    printf("6\n");
 
-    // update last player's move
+    // update last player's move for en passant
     current_player->last_move_start_row = start_row;
     current_player->last_move_end_row = end_row;
     current_player->last_piece_moved = board[start_row][start_column];
     // check if the king or rooks moved (for castling)
     if(board[start_row][start_column] == 'K' || board[start_row][start_column] == 'k'){current_player->king_moved = TRUE;}
-    if(board[start_row][start_column] == 'R' && start_column == 0){current_player->rook_a_moved = TRUE;}
-    if(board[start_row][start_column] == 'R' && start_column == 7){current_player->rook_h_moved = TRUE;}
+    if((board[start_row][start_column] == 'R' || board[start_row][start_column] == 'r')){
+        if(start_column == 0) current_player->rook_a_moved = TRUE;
+        if(start_column == 7) current_player->rook_h_moved = TRUE;
+    }
     
     return TRUE;
 }
