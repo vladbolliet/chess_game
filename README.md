@@ -1,3 +1,5 @@
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 # Chess Game
 
 This project is a simple console-based chess game implemented in C. It allows two players to play a game of chess with basic functionalities such as move validation, castling, en passant, and checkmate detection.
